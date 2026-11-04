@@ -54,3 +54,15 @@
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
 })();
+
+// ---- Placeholder tile for papers without a figure ----
+document.querySelectorAll(".pub-preview:empty").forEach(function (el) {
+  var v = el.parentNode.querySelector(".pub-venue");
+  var text = v ? v.textContent.trim() : "";
+  var m = text.match(/^(.*?)\s*(\d{4})$/);
+  el.classList.add("placeholder");
+  el.setAttribute("aria-hidden", "true");
+  el.innerHTML = '<span class="ph-venue"></span><span class="ph-year"></span>';
+  el.querySelector(".ph-venue").textContent = m ? m[1] : text;
+  el.querySelector(".ph-year").textContent = m ? m[2] : "";
+});

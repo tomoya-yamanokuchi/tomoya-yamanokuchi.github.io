@@ -349,3 +349,22 @@ ul.plain li { margin-bottom: 0.25rem; }
 @media (max-width: 640px) { .news th { width: 5.5rem; } }
 
 .page-title .former { font-weight: 300; font-size: 0.5em; color: var(--muted); white-space: nowrap; }
+
+/* Placeholder tile for papers without a figure */
+.pub-preview.placeholder {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  background: color-mix(in srgb, var(--tag-bg) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--rule) 70%, transparent);
+  border-radius: 3px;
+  color: color-mix(in srgb, var(--muted) 85%, transparent);
+  text-align: center;
+  padding: 0.5rem;
+}
+.placeholder .ph-venue { font-size: 1rem; font-weight: 500; line-height: 1.2; }
+.placeholder .ph-year { font-size: 0.8rem; opacity: 0.8; }
+@media (max-width: 640px) { .pub-preview.placeholder { display: none; } }
