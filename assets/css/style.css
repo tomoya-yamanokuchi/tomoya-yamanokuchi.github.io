@@ -1,0 +1,349 @@
+/* ------------------------------------------------------------
+   Tomoya Yamanokuchi — personal site
+   Layout modelled on the al-folio academic template.
+   ------------------------------------------------------------ */
+
+:root {
+  --bg: #ffffff;
+  --ink: #1d2126;
+  --muted: #5c6670;
+  --rule: #e2e5e9;
+  --accent: #0f6a5b;        /* deep teal: links, active nav, own name */
+  --accent-soft: #e6f2ef;
+  --tag-bg: #f2f4f6;
+  --code-bg: #f6f8fa;
+  --font: "Source Sans 3", "Hiragino Sans", "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15181c;
+    --ink: #e4e7ea;
+    --muted: #9aa4ae;
+    --rule: #2c3238;
+    --accent: #5cc4ae;
+    --accent-soft: #1c2f2b;
+    --tag-bg: #22272d;
+    --code-bg: #1d2126;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15181c;
+  --ink: #e4e7ea;
+  --muted: #9aa4ae;
+  --rule: #2c3238;
+  --accent: #5cc4ae;
+  --accent-soft: #1c2f2b;
+  --tag-bg: #22272d;
+  --code-bg: #1d2126;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* ---------- Navigation ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-inner {
+  max-width: 930px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  color: var(--ink);
+  font-size: 1.15rem;
+  font-weight: 300;
+}
+.brand strong { font-weight: 600; }
+.brand:hover { text-decoration: none; color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a { color: var(--ink); }
+.nav-links a[aria-current="page"] { color: var(--accent); font-weight: 600; }
+.nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+.icon-btn {
+  background: none;
+  border: 0;
+  padding: 4px;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+}
+.icon-btn:hover { color: var(--accent); }
+.icon-btn svg { width: 18px; height: 18px; }
+.nav-toggle { display: none; }
+
+@media (max-width: 640px) {
+  .nav-toggle { display: inline-flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem 1.25rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-links.open { display: flex; }
+}
+
+/* ---------- Page ---------- */
+
+main {
+  max-width: 930px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+.page-title {
+  font-size: 2.6rem;
+  font-weight: 300;
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+.page-title strong { font-weight: 600; }
+.page-desc {
+  color: var(--muted);
+  margin: 0 0 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.75rem 0 1rem;
+  color: var(--accent);
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+/* ---------- About ---------- */
+
+.profile {
+  float: right;
+  width: 230px;
+  margin: 0.25rem 0 1rem 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.profile img {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+}
+.about-text p { margin: 0 0 1rem; max-width: 62ch; }
+.clearfix::after { content: ""; display: table; clear: both; }
+
+@media (max-width: 640px) {
+  .profile { float: none; width: 180px; margin: 0 auto 1.5rem; }
+  .page-title { font-size: 2.1rem; }
+}
+
+ul.plain { margin: 0; padding-left: 1.2rem; }
+ul.plain li { margin-bottom: 0.25rem; }
+
+/* ---------- News ---------- */
+
+.news {
+  width: 100%;
+  border-collapse: collapse;
+}
+.news th, .news td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.news th {
+  width: 7.5rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding-right: 1rem;
+}
+.news tr:last-child th, .news tr:last-child td { border-bottom: 0; }
+
+/* ---------- Publications ---------- */
+
+.year-group { position: relative; }
+.pub-list { list-style: none; margin: 0; padding: 0; }
+.pub {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub:last-child { border-bottom: 0; }
+.pub.no-preview { grid-template-columns: 1fr; }
+.pub-preview img {
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: #fff;
+}
+.pub-venue {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 3px;
+  padding: 0.05rem 0.45rem;
+  margin-bottom: 0.3rem;
+}
+.pub-title { font-weight: 600; line-height: 1.35; }
+.pub-authors { margin-top: 0.2rem; }
+.pub-authors .me { font-weight: 600; font-style: italic; color: var(--ink); }
+.pub-meta { color: var(--muted); font-style: italic; margin-top: 0.15rem; }
+.pub-note { color: var(--accent); font-weight: 600; font-style: normal; }
+
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+.pub-links a, .pub-links button {
+  font: inherit;
+  font-size: 0.78rem;
+  line-height: 1;
+  padding: 0.38rem 0.6rem;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.pub-links a:hover, .pub-links button:hover,
+.pub-links button[aria-expanded="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.pub-abstract, .pub-bibtex { margin-top: 0.75rem; }
+.pub-abstract[hidden], .pub-bibtex[hidden] { display: none; }
+.pub-abstract {
+  font-size: 0.95rem;
+  border-left: 3px solid var(--rule);
+  padding-left: 0.9rem;
+}
+.pub-bibtex pre {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.75rem;
+  overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+  .pub { grid-template-columns: 1fr; }
+  .pub-preview img { max-width: 320px; }
+}
+
+.lang-ja .pub-title, .lang-ja .pub-authors { font-family: "Hiragino Sans", "Noto Sans JP", var(--font); }
+
+/* ---------- CV ---------- */
+
+.cv-entry {
+  display: grid;
+  grid-template-columns: 10.5rem 1fr;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.cv-entry:last-child { border-bottom: 0; }
+.cv-date { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cv-what strong { font-weight: 600; }
+.cv-what .sub { color: var(--muted); font-size: 0.95rem; }
+
+@media (max-width: 640px) {
+  .cv-entry { grid-template-columns: 1fr; gap: 0.1rem; }
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 2rem;
+  padding: 1.75rem 1.25rem 2.25rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 0.9rem;
+}
+.social a { color: var(--ink); display: inline-flex; }
+.social a:hover { color: var(--accent); }
+.social svg { width: 26px; height: 26px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}
+
+.pub-body { min-width: 0; }
+@media (max-width: 640px) { .pub-preview:empty { display: none; } }
+.lang-ja .pub-meta, .lang-ja .pub-authors .me { font-style: normal; }
+@media (max-width: 640px) { .news th { width: 5.5rem; } }
